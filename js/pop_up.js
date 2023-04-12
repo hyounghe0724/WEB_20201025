@@ -22,5 +22,6 @@ function showclock(){
         if (currentDate.getMinutes()>58) {    //정각 1분전 빨강색 출력
           divClock.style.color="red";
         }
-        setTimeout(show_clock, 1000);  //1초마다 갱신
 }
+setInterval(showclock, 1000);  //1초마다 갱신
+
