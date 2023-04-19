@@ -17,11 +17,13 @@ function showclock(){
  
         msg += currentDate.getMinutes()+"분";
         msg += currentDate.getSeconds()+"초";
-        divClock.innerText = msg;
+        divClock.innerHTML = msg;
  
         if (currentDate.getMinutes()>58) {    //정각 1분전 빨강색 출력
           divClock.style.color="red";
-        }
+		}
+		setTimeout(showclock, 1000);  
+	 	//setInterval(showclock, 1000);  //1초마다 갱신	 
+
 }
-setInterval(showclock, 1000);  //1초마다 갱신
 
