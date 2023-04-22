@@ -17,9 +17,8 @@ const search_message = () =>{
 		let search_str = document.querySelector("#search_txt"); // 변수에 저장
 		search_array.push(search_str.value);
 		console.log(search_array.length)
-		if(search_array.length > 2){
-			console.log("tlqkf");
-			search_array.pop();
+		if(search_array.length > 10){
+			search_array.shift();
 		}
 		document.getElementById("search_message").innerHTML = search_array.toString(); // 태그에 값 추가
 		//let text = document.getElementById("search_message").innerHTML = search_str.value;

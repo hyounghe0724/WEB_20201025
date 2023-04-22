@@ -5,7 +5,7 @@ clearTimeout(close_time); // 재호출 정지
 close_time = setTimeout("close_window()", 10000);
 const show_time = () => {
 	let divClock = document.querySelector("#Time");
-	divClock.innerText = close_time2;
+	divClock.innerText = "남은 시간은 "+ close_time2 + " 초 입니다.";
 	close_time2--;
 	setTimeout(show_time, 1000);
 }
