@@ -9,22 +9,29 @@ function login(){
 	const passRegex = /^[a-z]{1,12}[0-9][!@#$%^&*()]$/;
 	form.action = "../index_login.html";
 	form.method = "get";
-	if(check.checked == true) { // 아이디 체크 o
-            alert("쿠키를 저장합니다.");
-            setCookie("id", id.value, 1); // 1일 저장
-			loginCount(login_count);
-            alert("쿠키 값 :" + id.value);
-        } 
-    else { // 아이디 체크 x
-            setCookie("id", id.value, 0); //날짜를 0 - 쿠키 삭제
-    }
-
 	
-	if(idRegex.test(id) || passRegex.test(password)){
-        alert("아이디와 비밀번호를 모두 입력해주세요.");
-    }else{
+	if(check.checked == true && (idRegex.test(id) && passRegex.test(password)) && (getCookie("loginFaied") < "3" || getCookie("loginFaied") === undefined)){
+		setCookie("id", id.value, 1); // 1일 저장
+		loginCount(login_count);
 		session_set();
-        form.submit();
+		form.submit();
+    }else if(getCookie("loginFaied") > "3"){
+		alert("4분간 로그인 할 수 없습니다");
+		check.checked = false;
+		setTimeout(function (){
+			check.checked = true;
+		}, 4 * 60 * 1000);
+	}
+	else{
+		if(getCookie("loginFailed") === undefined){
+			setCookie("loginFailed", 1, 1);
+		}
+		else{
+			console.log("1");
+			setCookie("loginFailed", parseInt(getCookie("loginFailed")) + 1 , 1);
+		}
+		setCookie("id", id.value, 0); //날짜를 0 - 쿠키 삭제
+		alert("아이디와 비밀번호를 모두 입력해주세요.");
     }
 
 }
