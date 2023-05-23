@@ -10,12 +10,12 @@ function login(){
 	form.action = "../index_login.html";
 	form.method = "get";
 	
-	if(check.checked == true && (idRegex.test(id) && passRegex.test(password)) && (getCookie("loginFaied") < "3" || getCookie("loginFaied") === undefined)){
+	if(check.checked == true && (idRegex.test(id) && passRegex.test(password)) && (parseInt(getCookie("loginFailed")) < 3 || getCookie("loginFailed") === undefined)){
 		setCookie("id", id.value, 1); // 1일 저장
 		loginCount(login_count);
 		session_set();
 		form.submit();
-    }else if(getCookie("loginFaied") > "3"){
+    }else if(parseInt(getCookie("loginFailed")) > "3"){
 		alert("4분간 로그인 할 수 없습니다");
 		check.checked = false;
 		setTimeout(function (){
