@@ -81,3 +81,12 @@ function session_join_set(){
 		alert("세션 스토리지 지원 x")
 	}
 }
+
+function session_join_get(){
+	if (sessionStorage) {
+		console.log(sessionStorage.getItem("Session_Storage_object"));
+       return sessionStorage.getItem("Session_Storage_encrypted");
+    } else {
+        alert("세션 스토리지 지원 x");
+    }
+}
