@@ -11,8 +11,8 @@ addJavascript('./js/session.js'); // 세션 함수
 addJavascript('./js/cookie.js'); // 쿠키 함수
 
 
-var login_count = getCookie("loginCount");
-var logout_count = getCookie("logoutCount");
+var login_cnt = getCookie("loginCount");
+var logout_cnt = getCookie("logoutCount");
 
 function setCookie(name, value, expiredays) {
         var date = new Date();
@@ -47,19 +47,28 @@ function login(){
 	let form = document.querySelector("#form_main");
 	let id = document.querySelector("#floatingInput");
 	let password = document.querySelector("#floatingPassword");
-	let check = document.querySelector("#idSaveCheck");
-	const idRegex = /^[a-z]{1,12}[0-9]*$/;
+	let check = document.querySelector("#idSaveCheck"); // 로그인 아이디 기억
+	const idRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
 	const passRegex = /^[a-z]{1,12}[0-9][!@#$%^&*()]$/;
 	form.action = "../index_login.html";
 	form.method = "get";
 	
-	if(check.checked === true && (idRegex.test(id) && passRegex.test(password)) &&
-	  parseInt(getCookie("loginFailed")) < 3 || getCookie("loginFailed") === undefined)
+
+
+	
+	if(idRegex.test(id) == true && passRegex.test(password) == true && (parseInt(getCookie("loginFailed")) < 3 || getCookie("loginFailed") === undefined)) // 로그인 패스워드 valiate와 쿠기 로그인 실패 ㅎ체크
 	  {
 		setCookie("id", id.value, 1); // 1일 저장
-		loginCount(login_count);
+		loginCount(login_cnt);
+		if(check.checked == true) { // 아이디 체크 o
+		alert("쿠키를 저장합니다.");
+		setCookie("id", id.value, 1); // 1일 저장
+		alert("쿠키 값 :" + id.value);
+		} 
+		else { // 아이디 체크 x
+				setCookie("id", id.value, 0); //날짜를 0 - 쿠키 삭제
+		}
 		session_set();
-		session_get();
 		form.submit();
     }else if(parseInt(getCookie("loginFailed")) > 3){
 		alert("4분간 로그인 할 수 없습니다");
@@ -76,27 +85,32 @@ function login(){
 			setCookie("loginFailed", parseInt(getCookie("loginFailed")) + 1 , 1);
 		}
 		setCookie("id", id.value, 0); //날짜를 0 - 쿠키 삭제
-		alert("아이디와 비밀번호를 모두 입력해주세요.");
+		if(idRegex.test(id) === false){
+			alert("아이디를 잘못 입력하셨습니다.")
+			
+		}else if( passRegex.test(password) === false){
+			alert("패스워드를 잘못 입력하셨습니다.")
+		}
     }
 
 }
 
-function loginCount(login_count){
+function loginCount(login_cnt){
 	// 구현 필
 	if(getCookie("loginCount") === undefined){
 		setCookie("loginCount", 1, 1);
 	}else{
-		login_count = parseInt(getCookie("loginCount")) + 1;
-		setCookie("loginCount", login_count, 1);
+		login_cnt = parseInt(getCookie("loginCount")) + 1;
+		setCookie("loginCount", login_cnt, 1);
 	}
 	
 }
-function logoutCount(logout_count){
+function logoutCount(logout_cnt){
 	if(getCookie("logoutCount") === undefined){
 		setCookie("logoutCount", 1, 1);
 	}else{
-		logout_count = parseInt(getCookie("logoutCount")) + 1;
-		setCookie("logoutCount", logout_count, 1);
+		logout_cnt = parseInt(getCookie("logoutCount")) + 1;
+		setCookie("logoutCount", logout_cnt, 1);
 	}
 }
 
@@ -114,7 +128,7 @@ function init(){ // 로그인 폼에 쿠키에서 가져온 아이디 입력
 
 
 function logout(){
-	logoutCount(logout_count);
+	logoutCount(logout_cnt);
 	session_del();
 	location.href='../index.html';
 }

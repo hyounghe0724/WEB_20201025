@@ -5,6 +5,7 @@ function addJavascript(jsname) { // 자바스크립트 외부 연동
 	s.setAttribute('src',jsname);
 	th.appendChild(s);
 }
+addJavascript('./js/security.js'); // 암복호화 함수
 addJavascript('./js/join.js'); // 암복호화 함수
 
 function session_del() {//세션 삭제
