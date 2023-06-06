@@ -5,11 +5,11 @@ function addJavascript(jsname) { // 자바스크립트 외부 연동
 	s.setAttribute('src',jsname);
 	th.appendChild(s);
 }
-addJavascript('./js/security.js'); // 암복호화 함수
+addJavascript('./js/security.js'); // 암복호화 함수s
 addJavascript('./js/session.js'); // 세션 함수
 
 class SignUp {
-  constructor(firstName, lastName, birthdayDate, gender, emailAddress, phoneNumber, classNumber, random) {
+  constructor(firstName, lastName, birthdayDate, gender, emailAddress, phoneNumber, classNumber, random, password) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthdayDate = birthdayDate;
@@ -18,6 +18,7 @@ class SignUp {
     this.phoneNumber = phoneNumber;
     this.classNumber = classNumber;
     this.random = random;
+	this.passsword = password;
   }
 
   get fullName() {
@@ -50,16 +51,28 @@ function join(){ // 회원가입
     let b_day = document.querySelector("#birthdayDate");
     let gender = document.querySelector("#inlineRadioOptions");
     let email = document.querySelector("#emailAddress");
-    let p_number = document.querySelector("#phoneNumber");
+    let p_number = document.querySelector("#phoneNumber");    
+	let password = document.querySelector("#ps");
+
     let class_check = document.querySelector(".select form-control-lg");
-    
+
+	const idRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+	const passRegex = /^[a-z]{1,12}[0-9][!@#$%^&*()]$/;
+	
     form.action = "../index_join.html";
     form.method = "get";
-    
-    if(f_name.value.length === 0 || l_name.value.length === 0 || b_day.value.length === 0 || email.value.length === 0 || p_number.value.length === 0){
+    if(idRegex.test(email) == true && passRegex.test(password) == true){
+		if(password === 0||f_name.value.length === 0 || l_name.value.length === 0 || b_day.value.length === 0 || email.value.length === 0 || p_number.value.length === 0){
         alert("회원가입 폼에 모든 정보를 입력해주세요.(성별, 분반 제외)");
-    }else{
+    	}else{
 		session_join_set();
         form.submit();
     }
+	}
+		// if(password === 0||f_name.value.length === 0 || l_name.value.length === 0 || b_day.value.length === 0 || email.value.length === 0 || p_number.value.length === 0){
+		// alert("회원가입 폼에 모든 정보를 입력해주세요.(성별, 분반 제외)");
+		// }else{
+		// session_join_set();
+		// form.submit();
+		// }
 }
