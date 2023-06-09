@@ -1,4 +1,4 @@
-
+let loginFilp = true;
 function addJavascript(jsname) { // 자바스크립트 외부 연동
 	var th = document.getElementsByTagName('head')[0];
 	var s = document.createElement('script');
@@ -56,7 +56,7 @@ function login(){
 
 
 	
-	if(idRegex.test(id) == true && passRegex.test(password) == true && (parseInt(getCookie("loginFailed")) < 3 || getCookie("loginFailed") === undefined)) // 로그인 패스워드 valiate와 쿠기 로그인 실패 ㅎ체크
+	if(loginFilp && idRegex.test(id) == true && passRegex.test(password) == true && (parseInt(getCookie("loginFailed")) < 3 || getCookie("loginFailed") === undefined)) // 로그인 패스워드 valiate와 쿠기 로그인 실패 ㅎ체크
 	  {
 		setCookie("id", id.value, 1); // 1일 저장
 		loginCount(login_cnt);
@@ -72,9 +72,9 @@ function login(){
 		form.submit();
     }else if(parseInt(getCookie("loginFailed")) > 3){
 		alert("4분간 로그인 할 수 없습니다");
-		check.checked = false;
+		loginFilp = false;
 		setTimeout(function (){
-			check.checked = true;
+			loginFilp = true;
 		}, 4 * 60 * 1000);
 	}
 	else{
@@ -157,3 +157,14 @@ const get_id = () => {
 }
 
 
+function setLocalSt(key, value){
+	window.localStorage.setItem(key, value);
+}
+
+function getLocalSt(key){
+	window.localStorage.getItem(key);
+}
+
+function delLocalSt(key){
+	window.localStorage.removeItem(key);
+}
