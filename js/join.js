@@ -75,9 +75,7 @@ function join(){ // 회원가입
 		alert("이미 같은 아이디가 존재 합니다");
 		return;
 	}
-	password = JSON.stringify(password.value);
-	email = JSON.stringify(email.value);
-	window.localStorage.setItem(email, password);
+	window.localStorage.setItem(JSON.stringify(email.value), JSON.stringify(password.value));
 	session_join_set();
 	form.submit();
 		// if(password === 0||f_name.value.length === 0 || l_name.value.length === 0 || b_day.value.length === 0 || email.value.length === 0 || p_number.value.length === 0){
