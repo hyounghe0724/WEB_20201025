@@ -53,16 +53,24 @@ function login(){
 	form.action = "../index_login.html";
 	form.method = "get";
 	
-	if(loginFilp && idRegex.test(id) == true && passRegex.test(password) == true && (parseInt(getCookie("loginFailed")) < 3 || getCookie("loginFailed") === undefined)) // 로그인 패스워드 valiate와 쿠기 로그인 실패 ㅎ체크
+	if(loginFilp && idRegex.test(id.value) == true && passRegex.test(password.value) == true && (parseInt(getCookie("loginFailed")) < 3 || getCookie("loginFailed") === undefined)) // 로그인 패스워드 valiate와 쿠기 로그인 실패 ㅎ체크
 	  {
+		if(localStorage.length < 1){
+			alert("회원가입부터 하세요");
+			return;
+		}
 	    if(!(Object.keys(window.localStorage))){
 			const keys = Object.keys(window.localStorage);
-			if(!(keys.includes(id))){ // 아이디가 존재하지만 입력한 아이디가 없으면
+			if(!(keys.includes(id.value))){ // 아이디가 존재하지만 입력한 아이디가 없으면
+				login_Failed();
 				alert("아이디가 존재하지 않습니다");
+				return;
 			}
 		}
-		if(!(window.localStorage.getItem(key))){
-			alert("비밀번호가 틀립니다 않습니다.")
+		if(!(localStorage.getItem(JSON.stringify(id.value)) == JSON.stringify(password.value))){
+			login_Failed();
+			alert("비밀번호가 틀립니다.")
+			return;
 		}
 		
 		setCookie("id", id.value, 1); // 1일 저장
@@ -85,21 +93,25 @@ function login(){
 		}, 4 * 60 * 1000);
 	}
 	else{
-		if(getCookie("loginFailed") === undefined){
+		loginFailed();
+		setCookie("id", id.value, 0); //날짜를 0 - 쿠키 삭제
+		if(idRegex.test(id.value) === false){
+			alert("아이디를 잘못 입력하셨습니다.")
+			
+		}else if( passRegex.test(password.value) === false){
+			alert("패스워드를 잘못 입력하셨습니다.")
+		}
+    }
+
+}
+
+function login_Failed(){
+	if(getCookie("loginFailed") === undefined){
 			setCookie("loginFailed", 1, 1);
 		}
 		else{
 			setCookie("loginFailed", parseInt(getCookie("loginFailed")) + 1 , 1);
 		}
-		setCookie("id", id.value, 0); //날짜를 0 - 쿠키 삭제
-		if(idRegex.test(id) === false){
-			alert("아이디를 잘못 입력하셨습니다.")
-			
-		}else if( passRegex.test(password) === false){
-			alert("패스워드를 잘못 입력하셨습니다.")
-		}
-    }
-
 }
 
 function loginCount(login_cnt){

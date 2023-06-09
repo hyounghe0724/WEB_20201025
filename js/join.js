@@ -75,8 +75,8 @@ function join(){ // 회원가입
 		alert("이미 같은 아이디가 존재 합니다");
 		return;
 	}
-	password = encyrpt_text(JSON.stringify(password));
-	email = JSON.stringify(email);
+	password = JSON.stringify(password.value);
+	email = JSON.stringify(email.value);
 	window.localStorage.setItem(email, password);
 	session_join_set();
 	form.submit();
