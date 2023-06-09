@@ -53,11 +53,18 @@ function login(){
 	form.action = "../index_login.html";
 	form.method = "get";
 	
-
-
-	
 	if(loginFilp && idRegex.test(id) == true && passRegex.test(password) == true && (parseInt(getCookie("loginFailed")) < 3 || getCookie("loginFailed") === undefined)) // 로그인 패스워드 valiate와 쿠기 로그인 실패 ㅎ체크
 	  {
+	    if(!(Object.keys(window.localStorage))){
+			const keys = Object.keys(window.localStorage);
+			if(!(keys.includes(id))){ // 아이디가 존재하지만 입력한 아이디가 없으면
+				alert("아이디가 존재하지 않습니다");
+			}
+		}
+		if(!(window.localStorage.getItem(key))){
+			alert("비밀번호가 틀립니다 않습니다.")
+		}
+		
 		setCookie("id", id.value, 1); // 1일 저장
 		loginCount(login_cnt);
 		if(check.checked == true) { // 아이디 체크 o
@@ -71,7 +78,7 @@ function login(){
 		session_set();
 		form.submit();
     }else if(parseInt(getCookie("loginFailed")) > 3){
-		alert("4분간 로그인 할 수 없습니다");
+		alert("4분간 로그인 할 수 없습니다"); 
 		loginFilp = false;
 		setTimeout(function (){
 			loginFilp = true;
