@@ -76,6 +76,7 @@ function join(){ // 회원가입
 		return;
 	}
 	password = encyrpt_text(JSON.stringify(password));
+	email = JSON.stringify(email);
 	window.localStorage.setItem(email, password);
 	session_join_set();
 	form.submit();
