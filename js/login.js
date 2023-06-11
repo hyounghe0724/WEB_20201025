@@ -61,7 +61,7 @@ function login(){
 		}
 	    if(!(Object.keys(window.localStorage))){
 			const keys = Object.keys(window.localStorage);
-			if(!(keys.includes(id.value))){ // 아이디가 존재하지만 입력한 아이디가 없으면
+			if(!(keys.includes(JSON.stringify(id.value)))){ // 아이디가 존재하지만 입력한 아이디가 없으면
 				login_Failed();
 				alert("아이디가 존재하지 않습니다");
 				return;
@@ -93,7 +93,7 @@ function login(){
 		}, 4 * 60 * 1000);
 	}
 	else{
-		loginFailed();
+		login_Failed();
 		setCookie("id", id.value, 0); //날짜를 0 - 쿠키 삭제
 		if(idRegex.test(id.value) === false){
 			alert("아이디를 잘못 입력하셨습니다.")
