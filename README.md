@@ -40,5 +40,5 @@
 
 #### localStorage 활용하여 회원가입 valiate 완료
  
-##### login Authenticate 완료
+##### login Authenticate 완료, login_Failed()함수 생성
 
