@@ -86,7 +86,7 @@ function session_join_set(){
 function session_join_get(){
 	if (sessionStorage) {
 		console.log(sessionStorage.getItem("Session_Storage_object"));
-		window.open("../index.html");
+		window.open("../index.html", "_self");
 
        return sessionStorage.getItem("Session_Storage_encrypted");
     } else {
