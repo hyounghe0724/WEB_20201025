@@ -42,3 +42,5 @@
  
 ##### login Authenticate 완료, login_Failed()함수 생성
 
+###### 회원가입 완료시 index.html로 redirect 하는 것 처럼 구현
+
