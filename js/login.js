@@ -49,7 +49,7 @@ function login(){
 	let password = document.querySelector("#floatingPassword");
 	let check = document.querySelector("#idSaveCheck"); // 로그인 아이디 기억
 	const idRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-	const passRegex = /^[a-z]{1,12}[0-9][!@#$%^&*()]$/;
+	const passRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;;
 	form.action = "../index_login.html";
 	form.method = "get";
 	

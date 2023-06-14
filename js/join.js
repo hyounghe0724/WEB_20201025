@@ -56,11 +56,14 @@ function join(){ // 회원가입
     let class_check = document.querySelector(".select form-control-lg");
 
 	const idRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-	const passRegex = /^[a-z]{1,12}[0-9][!@#$%^&*()]$/;
-	
+	const passRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;;
+ 	
     form.action = "../index_join.html";
     form.method = "get";
-	if(idRegex.test(email) != true || passRegex.test(password) != true){
+	if(idRegex.test(email.value) != true || passRegex.test(password.value) != true){
+		console.log(idRegex.test(email.value));
+		console.log(idRegex.test(password.value));
+
 		return;
 	}
 	if(password === 0||f_name.value.length === 0 || l_name.value.length === 0 || b_day.value.length === 0 || email.value.length === 0 || p_number.value.length === 0){
