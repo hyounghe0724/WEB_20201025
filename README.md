@@ -18,7 +18,7 @@
 
 ######## 2023 5월 10일 예비군, 5월 17일 login, logout 구현 완
 
-######### 2023 5월 21일 로그인 카운팅 , 로그인 3회 이상 실패시 로그인 x 구현, getCookie 함수 return 수정
+######### 2023 5월 21일 로그인 카운팅 , 로그인 3회 이상 실패시 로그인 x 구현(login_Failed()함수 생성, getCookie 함수 return 수정
 
 ########## 2023 5월 24일 로그인 시간 5분 유지,
 5분 이후 자동으로 로그아웃 구현
@@ -38,9 +38,13 @@
 
 ### 2023년 6월 9일 4분후 로그아웃 수정 (check.checked로 하던것을 새로운 변수로 함)
 
-#### localStorage 활용하여 회원가입 valiate 완료
- 
-##### login Authenticate 완료, login_Failed()함수 생성
+# 추가 구현 한 것 들
 
-###### 회원가입 완료시 index.html로 redirect 하는 것 처럼 구현
+## 두 번째의 nav바에 있던 소개페이지 링크를 첫 번째 nav바로 옮김 
+
+### localStorage 활용하여 회원가입, 회원가입시 password입력 칸 생성, valiate 완료
+ 
+#### login Authenticate 완료, 
+
+##### 회원가입 완료시 index.html로 redirect 하는 것 처럼 구현
 
